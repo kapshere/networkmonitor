@@ -125,7 +125,7 @@ private struct EntryView: View {
             .background(background, in: RoundedRectangle(cornerRadius: 10))
     }
 
-    private func icon(for state: ChatViewModel.ToolState) -> String {
+    private func icon(for state: ChatViewModel.Entry.ToolState) -> String {
         switch state {
         case .running: return "gearshape.arrow.triangle.2.circlepath"
         case .succeeded: return "checkmark.circle"
