@@ -43,8 +43,10 @@ final class NetworkInterfaceStatsToolTests: XCTestCase {
 
     func testIncludeInactiveAndInterfaceFilter() async throws {
         let tool = NetworkInterfaceStatsTool(provider: FakeProvider([[en0, en5, lo0]]), wait: instantWait)
-        XCTAssertEqual(names(try decode(try await tool.run(["include_inactive": true]))), ["en0", "en5", "lo0"])
-        XCTAssertEqual(names(try decode(try await tool.run(["interface": "en5"]))), ["en5"])
+        let all = try decode(try await tool.run(["include_inactive": true]))
+        XCTAssertEqual(names(all), ["en0", "en5", "lo0"])
+        let single = try decode(try await tool.run(["interface": "en5"]))
+        XCTAssertEqual(names(single), ["en5"])
     }
 
     func testUnknownInterfaceListsAvailableOnes() async throws {
